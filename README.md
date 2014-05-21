@@ -46,7 +46,7 @@ As with most Cordova/PhoneGap APIs, functionality is not available until the
 should be included _after_ the `phonegap.js` file.
 
 All functions are called on the singleton ChildBrowser instance - accessible
-as `window.plugins.childBrowser`.
+as `window.plugins.ChildBrowser`.
 
 ### Methods
 
@@ -64,7 +64,7 @@ Available options:
 
 Example:
 
-    window.plugins.childBrowser.showWebPage('http://www.google.com',
+    window.plugins.ChildBrowser.showWebPage('http://www.google.com',
                                             { showLocationBar: true });
 
 #### close
@@ -75,7 +75,7 @@ Closes the ChildBrowser.
 
 Example:
 
-    window.plugins.childBrowser.close();
+    window.plugins.ChildBrowser.close();
 
 #### openExternal
 
@@ -86,12 +86,12 @@ browser will be a PhoneGap-enabled webview
 
 Example:
 
-    window.plugins.childBrowser.openExternal('http://www.google.com');
+    window.plugins.ChildBrowser.openExternal('http://www.google.com');
 
 ### Events
 
 All events can be subscribed to by assigning a function to
-`window.plugins.childBrowser['on' + eventName]`; see examples below
+`window.plugins.ChildBrowser['on' + eventName]`; see examples below
 
 #### close
 
@@ -99,7 +99,7 @@ Called when the ChildBrowser has been closed
 
 Example:
 
-    window.plugins.childBrowser.onClose = function () {
+    window.plugins.ChildBrowser.onClose = function () {
         alert('childBrowser has closed');
     };
 
@@ -111,7 +111,7 @@ loaded.
 
 Example:
 
-    window.plugins.childBrowser.onLocationChange = function (url) {
+    window.plugins.ChildBrowser.onLocationChange = function (url) {
         alert('childBrowser has loaded ' + url);
     };
 
@@ -122,7 +122,7 @@ Example:
 
 Example:
 
-    window.plugins.childBrowser.onOpenExternal = function () {
+    window.plugins.ChildBrowser.onOpenExternal = function () {
         alert('opening Mobile Safari');
     };
 
@@ -145,3 +145,5 @@ Copyright (c) 2011, IBM Corporation
 Copyright (c) 2010 Jesse MacFadyen, Nitobi
 
 Copyright (c) 2012 Randy McMillan
+
+Copyright (c) 2013 Takhfifan

@@ -98,20 +98,6 @@
 	self.webView.delegate = nil;
     self.delegate = nil;
     self.orientationDelegate = nil;
-	
-#if !__has_feature(objc_arc)
-	[self.webView release];
-	[self.closeBtn release];
-	[self.refreshBtn release];
-	[self.addressLabel release];
-	[self.backBtn release];
-	[self.fwdBtn release];
-	[self.safariBtn release];
-	[self.spinner release];
-    [self.toolbar release];
-
-	[super dealloc];
-#endif
 }
 
 -(void)closeBrowser
@@ -149,7 +135,7 @@
 	
 	if(isImage)
 	{
-		NSURL* pURL = [[ [NSURL alloc] initWithString:imageURL ] autorelease];
+		NSURL* pURL = [ [NSURL alloc] initWithString:imageURL ];
 		[ [ UIApplication sharedApplication ] openURL:pURL  ];
 	}
 	else
@@ -284,7 +270,6 @@
     closeRG.direction = UISwipeGestureRecognizerDirectionLeft;
     closeRG.delegate=self;
     [self.view addGestureRecognizer:closeRG];
-    [closeRG release];
 }
 
 //- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer

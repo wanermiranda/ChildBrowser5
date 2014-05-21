@@ -4,6 +4,7 @@
 //  Copyright (c) 2011, IBM Corporation
 //  Copyright 2011, Randy McMillan
 //  Copyright 2012, Andrew Lunny, Adobe Systems
+//  Copyright 2013, Behrooz Shabani, Takhfifan
 //
 
 #import "ChildBrowserCommand.h"
@@ -24,26 +25,22 @@
     return self;
 }
 
-- (void) showWebPage:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options // args: url
-{	
-    self.callbackId = [arguments objectAtIndex:0];
-	
+- (void) showWebPage:(CDVInvokedUrlCommand*)command {
+    self.callbackId = command.callbackId;
+    
     if (self.childBrowser == nil) {
-#if __has_feature(objc_arc)
         self.childBrowser = [[ChildBrowserViewController alloc] initWithScale:NO];
-#else
-        self.childBrowser = [[[ChildBrowserViewController alloc] initWithScale:NO] autorelease];
-#endif
         self.childBrowser.delegate = self;
         self.childBrowser.orientationDelegate = self.viewController;
     }
 
+    NSMutableDictionary* options = (NSMutableDictionary*)[command argumentAtIndex:1];
     NSLog(@"showLocationBar %d",(int)[[options objectForKey:@"showLocationBar"] boolValue]);
 
     [self.viewController presentModalViewController:self.childBrowser animated:YES];
         
     // objectAtIndex 0 is the callback id
-    NSString *url = (NSString*) [arguments objectAtIndex:1];
+    NSString* url = (NSString*) [command.arguments objectAtIndex:0];
     
     [self.childBrowser resetControls];
     [self.childBrowser loadURL:url];
@@ -55,7 +52,7 @@
         [childBrowser showNavigationBar:[[options objectForKey:@"showNavigationBar"] boolValue]];
 }
 
--(void) close:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options // args: url
+-(void) close:(CDVInvokedUrlCommand*)command
 {
     [self.childBrowser closeBrowser];
 	
